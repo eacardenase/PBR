@@ -16,16 +16,16 @@ void metersToFeetAndInches(double meters, unsigned int *ftPtr, double *inPtr)
     double rawFeet = meters * 3.281;
     
     // How many complete feet as an unsigned int?
-    unsigned int feet = (unsigned int)floor(rawFeet);
+    double feet;
+    double fractionalFoot = modf(rawFeet, &feet);
     
     // Store the number of feet at the supplied address
     if (ftPtr) {
-        printf("Storing %u to the address %p\n", feet, ftPtr);
+        printf("Storing %u to the address %p\n", (unsigned int)feet, ftPtr);
         *ftPtr = feet;
     }
     
     // Calculate inches
-    double fractionalFoot = rawFeet - feet;
     double inches = fractionalFoot * 12.0;
     
     // Store the number of inches at the supplied address
